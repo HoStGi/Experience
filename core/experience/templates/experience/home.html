@@ -1,0 +1,35 @@
+{% extends 'experience/base.html' %}
+{% load trans from i18n %}
+
+
+{% block content %}
+    {% if request.user.is_authenticated %}
+    {% if count == 0 %}
+        <p style="text-align: center; color: #FDA83D">У вас нет ни одного воспоминания</p>
+        <a href="{% url 'add_post' %}"><p style="text-align: center"><button type="button" class="btn btn-outline-danger">Добавить воспоминание</button></p></a>
+    {% endif %}
+
+
+{% for post in posts %}
+<div class="card text-center">
+  <div class="card-header">
+    #Место под карту#
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{post.title}}</h5>
+    <p class="card-text">{{post.content}}</p>
+    <a href="#" class="btn btn-primary">Читать пост</a>
+  </div>
+  <div class="card-footer text-muted">
+    {{post.time_create}}
+  </div>
+</div>
+{% endfor %}
+
+        <img src="{{user.profile.avatar}}">
+    {% else %}
+    <meta http-equiv="refresh" content="2; URL='about'">
+    {% endif %}
+{% endblock %}
+
+
