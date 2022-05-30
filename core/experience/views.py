@@ -2,8 +2,8 @@ from django.contrib.auth import logout
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from experience.forms import AddPostForm
-from experience.models import Post
+from requests import delete
+from experience.models import Post, Profile
 
 
 def about(request):
@@ -33,6 +33,7 @@ class CreateList(CreateView):
 
 
 def logout_user(request):
+    Profile.objects.all().delete()
     logout(request)
     return render(request, 'experience/about.html')
 

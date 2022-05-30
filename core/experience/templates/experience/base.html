@@ -19,6 +19,8 @@
 			<li class="logo"><a href="{% url 'about' %}"><div class="logo"></div></a></li>
 			{% if request.user.is_authenticated %}
 			<li class="last"> {{ user.first_name }} | <a href="{% url 'logout' %}">Выйти</a></li>
+			<li class="last">{{ user.last_name }} </li>
+			<img src="{{user.profile.avatar}}">
 			<li class="last"><a href="{% url 'add_post' %}">Добавить воспоминание</a></li>
 			{% endif %}
 		</ul>
