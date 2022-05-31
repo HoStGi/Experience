@@ -129,10 +129,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
     'social_core.backends.vk.VKOAuth2',          # бекенд авторизации через ВКонтакте
     'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
 )
+# Facebook
+SOCIAL_AUTH_FACEBOOK_KEY = '724144528737389'
+SOCIAL_AUTH_FACEBOOK_SECRET = '540a0849812b76c4add12775a3921980'
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
+
+# VK
 SOCIAL_AUTH_VK_OAUTH2_KEY = '8024128 '
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'w7o8GNw5oO6Sa14QiHKZ'
 LOGIN_REDIRECT_URL = '/'
@@ -153,5 +160,5 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'experience.pipeline.save_profile',
+    'experience.views.save_profile',
 )

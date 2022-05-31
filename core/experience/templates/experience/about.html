@@ -22,13 +22,21 @@
     <p style="text-align: center"> Привет! {{ user.first_name }}</p>
     <meta http-equiv="refresh" content="2; URL='home'">
 {% else %}
+<a href="{% url 'social:begin' 'facebook' %}">
+  <p style="text-align: center">
+      <button type="button" class="btn btn-outline-danger">
+        Войти с помощью Facebook
+      </button>
+  </p>
+</a>
 <a href="/login/vk-oauth2" title="{% trans 'Login via VKontakte' %}">
     <p style="text-align: center">
         <button type="button" class="btn btn-outline-danger">
-            Войти с помощью VK/Facebook(Facebook not work!)
+          Войти с помощью VK
         </button>
     </p>
 </a>
+
 <img class="w mx-auto d-block" src="{% static 'experience/images/about1.png' %}" alt="photo">
 {% endif %}
 {% endblock %}
