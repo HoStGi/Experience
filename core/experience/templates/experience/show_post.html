@@ -1,9 +1,0 @@
-{% extends 'experience/base.html' %}
-
-{% block content %}
-{% if request.user.is_authenticated %}
-<h1>{{post_item.title}}</h1>
-
-{{post_item.content|linebreaks}}
-{% endif %}
-{% endblock %}

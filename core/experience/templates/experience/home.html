@@ -6,7 +6,7 @@
     {% if request.user.is_authenticated %}
     {% if count == 0 %}
         <p style="text-align: center; color: #FDA83D">У вас нет ни одного воспоминания</p>
-        <a href="{% url 'add_post' %}"><p style="text-align: center"><button type="button" class="btn btn-outline-danger">Добавить воспоминание</button></p></a>
+        <a href="{% url 'post_create_url' %}"><p style="text-align: center"><button type="button" class="btn btn-outline-danger">Добавить воспоминание</button></p></a>
     {% endif %}
 
 
@@ -19,11 +19,13 @@
     <h5 class="card-title">{{post.title}}</h5>
     <p class="card-text">{{post.content |safe|linebreaks|truncatewords:50  }}</p>
     <a href="{{ post.get_absolute_url }}" class="btn btn-primary">Читать пост</a>
+    <a href="{{ post.get_delete_event_url }}" class="btn btn-outline-danger">Удалить пост</a>
   </div>
   <div class="card-footer text-muted">
     {{post.time_create}}
   </div>
 </div>
+<br><br>
 {% endfor %}
 
     {% else %}

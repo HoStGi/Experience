@@ -15,11 +15,11 @@
 {% block mainmenu %}
 	<div class="header">
 		<ul id="mainmenu" class="mainmenu">
-			<li class="logo"><a href="{% url 'about' %}"><div class="logo"></div></a></li>
+			<li class="logo"><a href="{% url 'about_url' %}"><div class="logo"></div></a></li>
 			{% if request.user.is_authenticated %}
-			<li class="last"> {{ user.first_name }} | <a href="{% url 'logout' %}">Выйти</a></li>
+			<li class="last"> {{ user.first_name }} | <a href="{% url 'logout_url' %}">Выйти</a></li>
 			<li class="last"><img src="{{user.profile.avatar}}" width="45" style="border-radius: 50%"></li>
-			<li class="first"><a href="{% url 'add_post' %}">Добавить воспоминание</a></li>
+			<li class="first"><a href="{% url 'post_create_url' %}">Добавить воспоминание</a></li>
 			{% endif %}
 		</ul>
 	</div>

@@ -1,10 +1,8 @@
-from gc import get_objects
 from django.contrib.auth import logout
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView
 from experience.models import Post, Profile
-
 
 def about(request):
     return render(request, 'experience/about.html')
@@ -20,12 +18,12 @@ def home(request):
         posts = Post.objects.filter(author=current_user, published=True)
         return render(request, 'experience/home.html', {'posts': posts, 'count': count})
 
+class PostCreate(CreateView):
 
-class CreateList(CreateView):
     model = Post
-    template_name = 'experience/add_post.html'
+    template_name = 'experience/post_create.html'
     fields = ('title', 'content','published',)
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('home_url')
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -39,14 +37,24 @@ def logout_user(request):
     return render(request, 'experience/about.html')
 
 
-
 def save_profile(backend, response,user=None, *args, **kwargs):
     Profile.objects.create(
         addres=user,
-        avatar=response['photo'],
-        
+        avatar=response['photo'],   
     )
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'GET':
+        print('*******************')
+        return render(request, 'experience/post_detail.html', {"post": post})
     
-def show_post(request, post_id):
-    post_item = Post.objects.get(pk=post_id)
-    return render(request, 'experience/show_post.html', {"post_item": post_item})
+
+def post_delete(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'GET':
+        post.delete()
+        return redirect('home_url')

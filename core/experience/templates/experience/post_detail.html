@@ -1,0 +1,27 @@
+{% extends 'experience/base.html' %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="container">
+  <div class="row">
+      <div class="col-md-24">
+          <div class="card mx-auto mb-25">
+              <div class="card-header">
+                  {{post.time_create}}
+              </div>
+              <div class="card-body">
+                  <h4 class="card-title" style="text-align: center">{{post.title}}</h4>
+                  <p class="card-text" style="text-align: center">{{post.content}}</p>
+                  <a href="{% url 'home_url' %}">
+                    <p style="text-align: center">
+                        <button type="button" class="btn btn-outline-danger">
+                          Назад
+                        </button>
+                    </p>
+                  </a> 
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+{% endif %}
+{% endblock %}
