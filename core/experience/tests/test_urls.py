@@ -1,5 +1,5 @@
 from django.test import SimpleTestCase
-from django.urls import path, reverse, resolve
+from django.urls import reverse, resolve
 from experience.views import PostCreate, logout_user, post_detail, home, about
 
 class TestUrls(SimpleTestCase):

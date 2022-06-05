@@ -11,11 +11,14 @@ def about(request):
 def home(request):
     current_user = request.user
     count = Post.objects.count()
-
     if count == 0:
         return render(request, 'experience/home.html', {'count': count})
     else:
         posts = Post.objects.filter(author=current_user, published=True)
+        if not posts:
+            count = 0 
+            print(count)
+            return render(request, 'experience/home.html', {'count': count})
         return render(request, 'experience/home.html', {'posts': posts, 'count': count})
 
 class PostCreate(CreateView):
@@ -45,16 +48,15 @@ def save_profile(backend, response,user=None, *args, **kwargs):
 
 
 def post_detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-
+    current_user = request.user
+    post = get_object_or_404(Post, pk=pk, author=current_user)
     if request.method == 'GET':
-        print('*******************')
         return render(request, 'experience/post_detail.html', {"post": post})
+
     
 
 def post_delete(request, pk):
     post = get_object_or_404(Post, pk=pk)
-
     if request.method == 'GET':
         post.delete()
         return redirect('home_url')

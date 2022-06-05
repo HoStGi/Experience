@@ -64,9 +64,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'social_django.context_processors.backends', # Добавил эту строку
-            ],
-        },
+                'social_django.context_processors.backends',]
+        },  
     },
 ]
 
@@ -130,13 +129,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.vk.VKOAuth2',          # бекенд авторизации через ВКонтакте
-    'django.contrib.auth.backends.ModelBackend', # бекенд классической аутентификации, чтобы работала авторизация через обычный логин и пароль
+    'social_core.backends.vk.VKOAuth2',          
+    'django.contrib.auth.backends.ModelBackend', 
 )
 # Facebook
 SOCIAL_AUTH_FACEBOOK_KEY = '724144528737389'
 SOCIAL_AUTH_FACEBOOK_SECRET = '540a0849812b76c4add12775a3921980'
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'photo']
 
 
 # VK
@@ -145,7 +144,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = 'w7o8GNw5oO6Sa14QiHKZ'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = [
-    'email', 'notify', 'fields', 'friends','photo',
+    'email', 'notify', 'fields', 'friends', 'photo',
 ]
 
 

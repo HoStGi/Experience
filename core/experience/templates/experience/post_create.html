@@ -2,7 +2,7 @@
 {% load trans from i18n %}
 
 {% block content %}
-
+{% if request.user.is_authenticated %}
 <form action="{% url 'post_create_url' %}" method="post" enctype="multipart/form-data">
     <p style="text-align: center">
     {% csrf_token %}
@@ -17,4 +17,12 @@
         </button>
     </p>
     </form>
+{% else %}
+
+<a href="{% url 'about_url' %}">
+    <p style="text-align: center">
+        <button type="button" class="btn btn-outline-danger">
+          Вернуться на главную страницу для авторизации.
+        </button>
+{% endif %}
 {% endblock %}
